@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Parcial2</string>
-    <string name="recycler_button">Lista de maestros</string>
+    <string name="recycler_teachers">Lista de docentes</string>
+    <string name="tv_title">Estudiantes de la Facultad de Ciencias Exactas</string>
+    <string name="tv_teacher">Docentes de la Facultad de Ciencias Exactas</string>
+    <string name="recycler_students">Lista de estudiantes</string>
+    <string name="alert_dialog">¿Desea acceder a esta lista?</string>
 </resources>

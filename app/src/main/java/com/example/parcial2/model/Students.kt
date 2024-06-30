@@ -7,5 +7,4 @@ data class Students (
     val age: Int
 )
 object StudentList {
-
     val listOfStudents = mutableListOf<Students>()}

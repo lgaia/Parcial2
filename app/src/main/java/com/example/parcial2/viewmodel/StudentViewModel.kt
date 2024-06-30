@@ -7,9 +7,15 @@ import com.example.parcial2.model.StudentList
 import com.example.parcial2.model.Students
 
 class StudentViewModel :ViewModel() {
-    val studentModel = MutableLiveData<List<Students>>()
-    val students : LiveData<List<Students>> = studentModel
+    val _students = MutableLiveData<List<Students>>()
+    val students : LiveData<List<Students>> = _students
     init {
-        studentModel.value = StudentList.listOfStudents
+        _students.value = StudentList.listOfStudents
     }
+    /*fun addStudent(name:String, lastname: String, career: String, age: Int){
+        val student = Students(name, lastname, career, age)
+        val updatedStudents = _students.value.orEmpty().toMutableList()
+        updatedStudents.add(student)
+        _students.value = updatedStudents
+    }*/
 }

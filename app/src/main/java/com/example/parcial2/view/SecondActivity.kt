@@ -1,6 +1,9 @@
 package com.example.parcial2.view
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -26,19 +29,28 @@ import com.example.parcial2.viewmodel.TeacherViewModel
 
 class SecondActivity : ComponentActivity() {
     private lateinit var binding : SecondActivityBinding
-
     private val teacherViewModel : TeacherViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SecondActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         teacherViewModel.teacherModel.observe(this, Observer { teacher ->
             initRecycler(TeacherList.listOfTeachers)
-
-
         })
+        binding.btnMainActivity.setOnClickListener {
+            val alertConfirmation : AlertDialog.Builder = AlertDialog.Builder(this)
+            alertConfirmation.setMessage("¿Desea acceder a esta lista?")
+            alertConfirmation.setCancelable(false)
+            alertConfirmation.setPositiveButton("Sí"){_,_->
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            alertConfirmation.setNegativeButton("No"){_,_->
+                Toast.makeText(this,"Click en no", Toast.LENGTH_SHORT).show()
+            }
+            alertConfirmation.create()
+            alertConfirmation.show()
+        }
     }
 
     private fun initRecycler(listOfTeachers: MutableList<Teachers>) {

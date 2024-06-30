@@ -2,13 +2,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/teal_200">
 
+    <TextView
+        android:id="@+id/tv_teacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="6dp"
+        android:textAlignment="center"
+        android:text="@string/tv_teacher"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        />
+    <Button
+        android:id="@+id/btnMainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/purple_200"
+        android:text="@string/recycler_students"
+        android:textColor="@color/purple_500"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_teacher" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTeachers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@id/btnMainActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_teacher"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

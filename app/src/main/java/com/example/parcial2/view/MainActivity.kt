@@ -1,19 +1,12 @@
 package com.example.parcial2.view
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +21,6 @@ import com.example.parcial2.viewmodel.StudentViewModel
 
 class MainActivity : ComponentActivity() {
     private lateinit var binding : ActivityMainBinding
-
     private val studentViewModel : StudentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,14 +28,22 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        studentViewModel.studentModel.observe(this, Observer {student->
+        studentViewModel._students.observe(this, Observer {students->
             initRecycler(StudentList.listOfStudents)
-
-
         })
         binding.btnSecondActivity.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
+            val alertConfirmation : AlertDialog.Builder = AlertDialog.Builder(this)
+            alertConfirmation.setMessage("¿Desea acceder a la lista de docentes?")
+            alertConfirmation.setCancelable(false)
+            alertConfirmation.setPositiveButton("Sí"){_,_->
+                val intent = Intent(this, SecondActivity::class.java)
+                startActivity(intent)
+            }
+            alertConfirmation.setNegativeButton("No"){_,_->
+                Toast.makeText(this,"Click en no",Toast.LENGTH_SHORT).show()
+            }
+            alertConfirmation.create()
+            alertConfirmation.show()
         }
     }
 
